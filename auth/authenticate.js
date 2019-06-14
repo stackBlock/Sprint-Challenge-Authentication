@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+secrets = require('../config/secrets.js')
 
 const jwtKey =
   process.env.JWT_SECRET ||
@@ -12,6 +13,8 @@ module.exports = {
 // implementation details
 function authenticate(req, res, next) {
   const token = req.get('Authorization');
+  console.log(jwtKey);
+  console.log(secrets.jwtSecret);
 
   if (token) {
     jwt.verify(token, jwtKey, (err, decoded) => {
